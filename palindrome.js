@@ -1,17 +1,50 @@
-// Reverses a string.
-function reverse(string) {
-  return Array.from(string).reverse().join("");
+// Adds `reverse` to all strings.
+String.prototype.reverse = function() {
+  return Array.from(this).reverse().join("");
+}
+
+String.prototype.blank = function() {
+  if (this.search(/\s+/g) === -1){return false}
+  else {return this.search(/\s+/g) === this.search(/^\s+$/g)} ;
+}
+
+Array.prototype.last = function() {
+  return this.slice(-1)[0];
 }
 
 // Defines a Phrase object.
 function Phrase(content) {
-  this.content = content;
+  this.content = content
 
-  this.processedContent = function processedContent() {
-    return this.content.toLowerCase();
+  this.letters = function letters(string) {
+    return Array.from(string).filter(c => c.match(/[a-z]/i)).join("");
+  }
+
+  this.processor = function(string) {
+    return this.letters(string).toLowerCase();
+  }
+
+  this.processedContent = function processedContent(string) {
+    return this.processor(string);
   }
 
   this.palindrome = function palindrome() {
-    return this.processedContent() === reverse(this.processedContent());
+    return this.processedContent(this.content) === this.processedContent(this.content).reverse();
   }
 }
+
+// Defines a TranslatedPhrase object.
+function TranslatedPhrase(content, translation) {
+  this.content = content;
+  this.translation = translation;
+
+  this.palindrome = function palindrome() {
+    return this.processedContent(this.translation) === this.processedContent(this.translation).reverse();
+  }
+}
+
+TranslatedPhrase.prototype = new Phrase();
+
+frase = new TranslatedPhrase("recognize", "Madam, I'm Adam.");
+console.log(frase.processedContent(frase.translation));
+console.log(frase.palindrome());
