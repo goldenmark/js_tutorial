@@ -1,0 +1,18 @@
+#!/usr/local/bin/node
+
+let request = require("request");
+let {Phrase} = require("golden-palindrome");
+let url = 'https://cdn.learnenough.com/phrases.txt'
+
+String.prototype.palindrome = function() {
+  phrase = new Phrase(this);
+  return phrase.palindrome();
+}
+
+request(url, function(error, response, body) {
+  let lines = body.split("\n");
+  let palindromes = lines.filter(line => line.palindrome());
+  palindromes.forEach(function(palindrome) {
+    console.log("palindrome detected:", palindrome);
+  });
+});

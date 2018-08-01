@@ -5,7 +5,9 @@
   "main": "main.js",
   "dependencies": {
     "golden-palindrome": "^0.1.0",
-    "palindrome": "^0.1.1"
+    "jsdom": "^11.12.0",
+    "palindrome": "^0.1.1",
+    "request": "^2.87.0"
   },
   "devDependencies": {},
   "scripts": {
