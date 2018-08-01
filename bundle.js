@@ -10,7 +10,7 @@ function palindromeTester(event) {
   if (phrase.palindrome()) {
     palindromeResult.innerHTML = `"${phrase.content}" is a palindrome!`;
   } else {
-    palindromeResult.innerHTML = `"${phrase.content}" is a not a palindrome.`;
+    palindromeResult.innerHTML = `"${phrase.content}" is not a palindrome.`;
   }
 }
 
@@ -58,7 +58,11 @@ function Phrase(content) {
   }
 
   this.palindrome = function palindrome() {
-    return this.processedContent(this.content) === this.processedContent(this.content).reverse();
+    if (this.letters(this.content)) {
+      return this.processedContent(this.content) === this.processedContent(this.content).reverse();
+    } else {
+      return false;
+    }
   }
 }
 
@@ -68,7 +72,11 @@ function TranslatedPhrase(content, translation) {
   this.translation = translation;
 
   this.palindrome = function palindrome() {
-    return this.processedContent(this.translation) === this.processedContent(this.translation).reverse();
+    if (this.letters(this.translation)) {
+      return this.processedContent(this.translation) === this.processedContent(this.translation).reverse();
+    } else {
+      return false;
+    }
   }
 }
 
